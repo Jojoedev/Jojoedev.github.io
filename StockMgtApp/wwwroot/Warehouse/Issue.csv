@@ -78,3 +78,19 @@ Name: Seagrams
  IssuedToDate:10.00 
  Date/Time: 12/08/2023 17:06:06 
 , 
+Name: Seagrams 
+ Quantity: 12.00, 
+ Cost: 1500.00,
+ Current Issue: 1 
+ Stock Balance: 1.00, 
+ IssuedToDate:11.00 
+ Date/Time: 12/08/2023 21:43:03 
+, 
+Name: Chivas 
+ Quantity: 12.00, 
+ Cost/Unit: 2000.00,
+ Current Issue: 10 
+ Stock Balance: 2.00, 
+ IssuedToDate:10.00 
+ Date/Time: 12/08/2023 23:03:24 
+, 

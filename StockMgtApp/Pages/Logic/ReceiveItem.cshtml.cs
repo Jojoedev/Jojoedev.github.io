@@ -53,10 +53,14 @@ namespace StockMgtApp.Pages.Logic
 
             if (ModelState.IsValid)
             {
-             var total = stockItem.Quantity * stockItem.Unitprice;
+                var total = stockItem.Quantity * stockItem.Unitprice;
                 stockItem.Total = total;
                 stockItem.StockBalance = stockItem.Quantity;
                 _Context.Add(stockItem);
+
+                //Logger.Log(stockItem);
+        //        Logger.SetAction("Issue");
+
                 _Context.SaveChanges();
                 return RedirectToPage("/Logic/List");
                 

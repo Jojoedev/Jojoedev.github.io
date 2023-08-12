@@ -21,7 +21,9 @@ namespace StockMgtApp.Pages.Logic
         }
 
         [BindProperty]
-        public StockItem StockItem { get; set; }
+        public StockItem stockItem { get; set; }
+        
+
 
         public ActionResult OnGet(int? id)
         {
@@ -31,10 +33,10 @@ namespace StockMgtApp.Pages.Logic
                 //           where n.Id == id
                 //         select n).FirstOrDefault();
 
-                StockItem = _Context.STOCKMGT.Include(x => x.Category).FirstOrDefault(n => n.Id == id);
-                     
+                stockItem = _Context.STOCKMGT.Include(x => x.Category).FirstOrDefault(n => n.Id == id);
+
                 //Clears Issue cell each time a new issue request is made.
-                               StockItem.IssueOut = 0;
+                stockItem.IssueOut = 0;
                
             }
             // return RedirectToAction("/Logic/List");
@@ -43,9 +45,7 @@ namespace StockMgtApp.Pages.Logic
 
         public ActionResult OnPost(StockItem stockItem)
         {
-               
             
-           
             CheckReOrderLevel(); //Validate availability of the requested stock
             
             ConfirmQty(); //Confirm available quantity
@@ -75,9 +75,12 @@ namespace StockMgtApp.Pages.Logic
                 {
                     stockItem.StockBalance = Purchaseqty - stockItem.NewTotal;
                 }
+
+                
                 
                 Logger.Log(stockItem); //Creating .csv file history on every issue operation.
-                
+
+                //Logger.SetAction("Issue");
                 _Context.SaveChanges();
                 return RedirectToPage("/Logic/List");
             }
@@ -85,12 +88,10 @@ namespace StockMgtApp.Pages.Logic
         }
 
         public void ConfirmQty()
-        {
-
+        {        
             
-            
-                var StockBal = StockItem.Quantity - StockItem.NewTotal;
-                if (StockItem.Quantity < StockItem.IssueOut || StockItem.IssueOut > StockBal)
+                var StockBal = stockItem.Quantity - stockItem.NewTotal;
+                if (stockItem.Quantity < stockItem.IssueOut || stockItem.IssueOut > StockBal)
                 {
                     throw new Exception("Error, Issue quantity cannot be more than avaliable quantity");
                 }    
@@ -102,7 +103,7 @@ namespace StockMgtApp.Pages.Logic
             
             var msg = ("The stock quantity has reached Re-Order Level");
             var ReOderLevel = 3;
-            var StockBal = StockItem.Quantity - StockItem.NewTotal;
+            var StockBal = stockItem.Quantity - stockItem.NewTotal;
             if(StockBal <= ReOderLevel)
             {
                 return msg;

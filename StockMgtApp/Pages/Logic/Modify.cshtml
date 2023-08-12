@@ -20,7 +20,7 @@
             <tbody class="col-5">
                 <tr>
                     <td> <input asp-for="@Model.StockItem.Id" readonly class="form-control" /></td>
-                    <td><input  class="form-control" readonly/></td>
+                    <td><input  asp-for="@Model.StockItem.Category.Name"/></td>
                     <td><input asp-for="@Model.StockItem.Quantity" class="form-control"></td>
                     <td><input asp-for="@Model.StockItem.Unitprice" class="form-control" readonly /></td>
                     <td><input asp-for="@Model.StockItem.Total" class="form-control" readonly /></td>

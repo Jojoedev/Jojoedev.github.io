@@ -32,7 +32,8 @@ namespace StockMgtApp
             options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
             // options.UseSqlServer().UseLazyLoadingProxies();
-            
+
+            services.AddMvc().AddRazorPagesOptions(options => options.Conventions.AddPageRoute("/Logic/List", ""));
             
             services.AddDefaultIdentity<Employee>(options =>
             {
@@ -41,6 +42,7 @@ namespace StockMgtApp
 
             })
 
+             
 
            //Use => options { } when you want to enforce so many validations.
 

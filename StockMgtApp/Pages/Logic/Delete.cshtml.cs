@@ -15,14 +15,21 @@ namespace StockMgtApp.Pages.Logic
         {
             _Context = context;
         }
+        public StockItem stockItem { get; set; }
         public ActionResult OnGet(int? id)
         {
-            if(id != null)
+            
+            if (id != null)
             {
+                //Logger.Log(stockItem);
                 var deleteItem = (from n in _Context.STOCKMGT
                          where n.Id == id
                          select n).FirstOrDefault();
                 _Context.Remove(deleteItem);
+                
+                
+                
+                //Logger.SetAction("Delete");
                 _Context.SaveChanges();
               
             }

@@ -21,9 +21,10 @@ namespace StockMgtApp.Pages.Logic
         {
             if(id != null)
             {
-                stockItem = (from n in _Context.STOCKMGT
-                            where n.Id == id
-                            select n).FirstOrDefault();
+                //stockItem = (from n in _Context.STOCKMGT
+                //           where n.Id == id
+                //         select n).FirstOrDefault();
+                stockItem = _Context.STOCKMGT.FirstOrDefault(x => x.Id == id);
                 stockItem = stockItem;
             }
          
