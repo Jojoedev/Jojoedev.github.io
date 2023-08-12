@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using StockMgtApp.Models;
 using System.IO;
+using Microsoft.EntityFrameworkCore;
 
 namespace StockMgtApp.Pages.Logic
 {
@@ -26,11 +27,13 @@ namespace StockMgtApp.Pages.Logic
         {
             if(id != null)
             {
-                StockItem = (from n in _Context.STOCKMGT
-                             where n.Id == id
-                             select n).FirstOrDefault();
-                              
-                                //Clears Issue cell each time a new issue request is made.
+                //StockItem = (from n in _Context.STOCKMGT
+                //           where n.Id == id
+                //         select n).FirstOrDefault();
+
+                StockItem = _Context.STOCKMGT.Include(x => x.Category).FirstOrDefault(n => n.Id == id);
+                     
+                //Clears Issue cell each time a new issue request is made.
                                StockItem.IssueOut = 0;
                
             }
@@ -41,7 +44,7 @@ namespace StockMgtApp.Pages.Logic
         public ActionResult OnPost(StockItem stockItem)
         {
                
-            Logger.Log(stockItem); //Creating .csv file on every issue.
+            
            
             CheckReOrderLevel(); //Validate availability of the requested stock
             
@@ -72,6 +75,9 @@ namespace StockMgtApp.Pages.Logic
                 {
                     stockItem.StockBalance = Purchaseqty - stockItem.NewTotal;
                 }
+                
+                Logger.Log(stockItem); //Creating .csv file history on every issue operation.
+                
                 _Context.SaveChanges();
                 return RedirectToPage("/Logic/List");
             }

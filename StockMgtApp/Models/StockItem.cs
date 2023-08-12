@@ -12,8 +12,6 @@ namespace StockMgtApp.Models
 
         [Key]
         public int Id { get;  set; }
-
-       
         public int? ItemCategoryId  { get; set; }
         public virtual ItemCategory Category { get; set; }
        

@@ -14,6 +14,7 @@ namespace StockMgtApp.Models
 
         }
 
+        
         public DbSet<StockItem> STOCKMGT { get; set; }
         public DbSet<ItemCategory> ItemCategories { get; set; }
 

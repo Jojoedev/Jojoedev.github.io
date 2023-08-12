@@ -8,9 +8,9 @@ namespace StockMgtApp.Models
 {
     public static class Logs
     {
-        public static bool MyLog(this StockItem item)
+        public static bool MyLog(this ItemCategory item, StockItem stockItem)
         {
-            var stock = item.Category;
+            var stock = item.Name;
             return true;
                         
         }

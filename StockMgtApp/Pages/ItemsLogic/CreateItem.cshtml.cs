@@ -26,13 +26,25 @@ namespace StockMgtApp.Pages.ItemsLogic
 
         public ActionResult OnPost(ItemCategory itemCategory) 
         {
-            if(ModelState.IsValid)
+            CheckDuplication(itemCategory);
+            if (ModelState.IsValid)
             {
                 _Context.ItemCategories.Add(itemCategory);
                 _Context.SaveChanges();
                 return RedirectToPage("List");
             }
             return Page();
+        }
+
+        public void CheckDuplication(ItemCategory item)
+        {
+            var NewItem = _Context.ItemCategories.Where(x => x.Name == item.Name);
+
+            if(NewItem.Any())
+            {
+                throw new Exception("Duplication error");
+            }
+            
         }
         
     }

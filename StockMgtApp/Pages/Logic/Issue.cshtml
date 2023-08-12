@@ -13,8 +13,9 @@
                 <td> <input asp-for="@Model.StockItem.Id" readonly /> </td>
             </tr>
             <tr>
-                <td> <label>Stock Name</label></td>
-                <td> <input  /> </td>
+                <td> <label asp-for="@Model.StockItem.Category.Name"></label></td>
+                
+                <td><input asp-for="@Model.StockItem.Category.Name" /></td> 
             </tr>
             <tr>
                 <td> <label asp-for="@Model.StockItem.Quantity">Quantity</label></td>
