@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StockMgtApp.Migrations
 {
-    public partial class newidentityuser : Migration
+    public partial class addingMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -39,7 +39,10 @@ namespace StockMgtApp.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    DateOfBirth = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,22 +50,16 @@ namespace StockMgtApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "STOCKMGT",
+                name: "ItemCategories",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StockName = table.Column<string>(nullable: false),
-                    Quantity = table.Column<decimal>(nullable: false),
-                    Unitprice = table.Column<decimal>(nullable: false),
-                    Total = table.Column<decimal>(nullable: false),
-                    IssueOut = table.Column<decimal>(nullable: false),
-                    StockBalance = table.Column<decimal>(nullable: false),
-                    NewTotal = table.Column<decimal>(nullable: false)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_STOCKMGT", x => x.Id);
+                    table.PrimaryKey("PK_ItemCategories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -111,8 +108,8 @@ namespace StockMgtApp.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(nullable: false),
-                    ProviderKey = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -156,8 +153,8 @@ namespace StockMgtApp.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
+                    Name = table.Column<string>(maxLength: 128, nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -169,6 +166,31 @@ namespace StockMgtApp.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "STOCKMGT",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ItemCategoryId = table.Column<int>(nullable: true),
+                    Quantity = table.Column<decimal>(nullable: false),
+                    Unitprice = table.Column<decimal>(nullable: false),
+                    Total = table.Column<decimal>(nullable: false),
+                    IssueOut = table.Column<decimal>(nullable: false),
+                    StockBalance = table.Column<decimal>(nullable: false),
+                    NewTotal = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_STOCKMGT", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_STOCKMGT_ItemCategories_ItemCategoryId",
+                        column: x => x.ItemCategoryId,
+                        principalTable: "ItemCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -209,6 +231,11 @@ namespace StockMgtApp.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_STOCKMGT_ItemCategoryId",
+                table: "STOCKMGT",
+                column: "ItemCategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -236,6 +263,9 @@ namespace StockMgtApp.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "ItemCategories");
         }
     }
 }

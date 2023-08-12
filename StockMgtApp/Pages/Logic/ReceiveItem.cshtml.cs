@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using StockMgtApp.Models;
 
@@ -13,19 +14,25 @@ namespace StockMgtApp.Pages.Logic
     {
        public readonly DatabaseContext _Context;
         private readonly ILogger _logger;
-        [BindProperty]
-        public StockItem stockItem { get; set; }
-
+        
         public CreateModel(DatabaseContext context, ILogger<CreateModel> logger)
         {
             _Context = context;
             _logger = logger;
             
         }
-        /*public void OnGet(int id)
-        {
 
-        }*/
+        [BindProperty]
+        public StockItem stockItem { get; set; }
+
+        public SelectList Items { get; set; }
+
+        public ActionResult OnGet()
+        {
+            Items = new SelectList(_Context.ItemCategories.ToList(), "Id", "Name");
+            return Page();
+        }
+
         
         public ActionResult OnPost(StockItem stockItem)
         {

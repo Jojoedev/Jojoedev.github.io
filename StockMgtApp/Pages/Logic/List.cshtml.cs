@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using StockMgtApp.Models;
 
+
 namespace StockMgtApp.Pages.Logic
 {
     [Authorize]
@@ -14,19 +15,19 @@ namespace StockMgtApp.Pages.Logic
     {
         private readonly DatabaseContext _Context;
 
-        public List<StockItem> StockItem { get; set; }
+        
         public IndexModel(DatabaseContext context)
         {
             _Context = context;
         }
-        
+        public ItemCategory itemCategory { get; set; }
+        public List<StockItem> StockItem { get; set; }
         public void OnGet()
         {
-            var Stock = (from emp in _Context.STOCKMGT
-                             select emp).ToList();
-            StockItem = Stock; 
-            
-                    
+            StockItem = (from emp in _Context.STOCKMGT select emp)
+                
+                .ToList();
+
         }
     }
 }

@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace StockMgtApp.Models
 {
-    public class Logs
+    public static class Logs
     {
-        public StockItem MyLog(StockItem stockItem, string msg)
+        public static bool MyLog(this StockItem item)
         {
-            return stockItem;
+            var stock = item.Category;
+            return true;
+                        
         }
 
     }

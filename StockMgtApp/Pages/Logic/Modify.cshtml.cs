@@ -39,7 +39,7 @@ namespace StockMgtApp.Pages.Logic
             if (ModelState.IsValid)
             {
                    
-                _Context.Entry(StockItem).Property(X => X.StockName).IsModified = false;
+               // _Context.Entry(StockItem).Property(X => X.StockName).IsModified = false;
                 _Context.Entry(StockItem).Property(X => X.Quantity).IsModified = true;
                 _Context.Entry(StockItem).Property(X => X.Unitprice).IsModified = false;
                   _Context.Entry(StockItem).Property(X => X.NewTotal).IsModified = false;

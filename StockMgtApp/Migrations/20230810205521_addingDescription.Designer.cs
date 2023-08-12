@@ -10,14 +10,14 @@ using StockMgtApp.Models;
 namespace StockMgtApp.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20221020200554_AddingEmployeeModel")]
-    partial class AddingEmployeeModel
+    [Migration("20230810205521_addingDescription")]
+    partial class addingDescription
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.0")
+                .HasAnnotation("ProductVersion", "3.1.30")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -99,10 +99,12 @@ namespace StockMgtApp.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -139,10 +141,12 @@ namespace StockMgtApp.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -228,6 +232,22 @@ namespace StockMgtApp.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("StockMgtApp.Models.ItemCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ItemCategories");
+                });
+
             modelBuilder.Entity("StockMgtApp.Models.StockItem", b =>
                 {
                     b.Property<int>("Id")
@@ -235,8 +255,14 @@ namespace StockMgtApp.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal>("IssueOut")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("ItemCategoryId")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("NewTotal")
                         .HasColumnType("decimal(18,2)");
@@ -247,10 +273,6 @@ namespace StockMgtApp.Migrations
                     b.Property<decimal>("StockBalance")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("StockName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");
 
@@ -259,7 +281,9 @@ namespace StockMgtApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StockItem");
+                    b.HasIndex("ItemCategoryId");
+
+                    b.ToTable("STOCKMGT");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -311,6 +335,13 @@ namespace StockMgtApp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("StockMgtApp.Models.StockItem", b =>
+                {
+                    b.HasOne("StockMgtApp.Models.ItemCategory", "Category")
+                        .WithMany()
+                        .HasForeignKey("ItemCategoryId");
                 });
 #pragma warning restore 612, 618
         }

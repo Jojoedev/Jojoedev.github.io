@@ -11,6 +11,7 @@
                 <tr>
                     <th>Id</th>
                     <th>StockName</th>
+                    <th>Description</th>
                     <th>Quantity</th>
                     <th>Unit cost</th>
                     <th>Value (N)</th>
@@ -27,7 +28,9 @@
                 <tr>
                     <td>@item.Id </td>
                    
-                    <td>@item.StockName</td>
+                    
+                    <td>@item.ItemCategoryId</td>
+                    <td>@item.Description</td>
                     <td>@item.Quantity</td>
                     <td>@item.Unitprice</td>
                     <td>@item.Total</td>

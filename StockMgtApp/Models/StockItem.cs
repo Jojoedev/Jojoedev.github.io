@@ -13,13 +13,10 @@ namespace StockMgtApp.Models
         [Key]
         public int Id { get;  set; }
 
-       /* [Display(Name = "Date")]
-        public DateTime DateOfReceipt { get; set; }*/
-
-        [Required(ErrorMessage ="Enter Product Name")]
-        [Display(Name = "Stock Name")]
-        public string StockName { get; set; }
-        //public Category Category { get; set; }
+       
+        public int? ItemCategoryId  { get; set; }
+        public virtual ItemCategory Category { get; set; }
+       
 
         [Display(Name = "Quantity")]
         [Required(ErrorMessage ="Enter product quantity")]
@@ -29,24 +26,26 @@ namespace StockMgtApp.Models
         [Required(ErrorMessage = "Enter price")]
         public decimal Unitprice { get; set; }
 
+        public string Description { get; set; }
+
         [Display(Name = "Total Value (N)")]
         public decimal Total { get; set; }
 
+        
         [Display(Name = "Total Issued Out")]
         public decimal IssueOut { get; set; }
 
+        
         [Display(Name = "Stock Balance")]
         public decimal StockBalance { get; set; }
 
+        
         [Display(Name = "New Total")]
         public decimal NewTotal { get; set; }
 
 
 
-        /*public int StockId { get; set; }
-        [ForeignKey("StockId")]
-        public StockHistory StockHistory { get; set; }*/
-
+        
     }
     
 }

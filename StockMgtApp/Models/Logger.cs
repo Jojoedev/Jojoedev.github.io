@@ -1,4 +1,4 @@
-﻿using CsvHelper;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -16,7 +16,7 @@ namespace StockMgtApp.Models
             string Quantity; 
             string Stockbalance; 
             string IssueOut; 
-            string Name; 
+           
             string UnitPrice; 
             string Total; 
             string value; 
@@ -25,7 +25,7 @@ namespace StockMgtApp.Models
             Quantity = stock.Quantity.ToString();
             Stockbalance = stock.StockBalance.ToString();
             IssueOut = stock.IssueOut.ToString();
-            Name = stock.StockName;
+            //Name = stock.StockName;
             UnitPrice = stock.Unitprice.ToString();
             Total = stock.NewTotal.ToString();
             value = stock.Total.ToString();
@@ -33,7 +33,7 @@ namespace StockMgtApp.Models
             
             DateTime date = DateTime.Now;
 
-            string newdata = string.Format($" Name: {Name}, \n Price: {UnitPrice}, \n  Quantity: {Quantity}, \n Issue: {IssueOut} \n Balance: {Stockbalance}, \n IssuedToDate:{Total} \n Date/Time: {date} \n, \n");
+            string newdata = string.Format($" Name: \n Price: {UnitPrice}, \n  Quantity: {Quantity}, \n Issue: {IssueOut} \n Balance: {Stockbalance}, \n IssuedToDate:{Total} \n Date/Time: {date} \n, \n");
 
             
                 var filepath = @"C:\Users\HP\Desktop\Log\Issue.csv";
