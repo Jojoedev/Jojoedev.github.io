@@ -94,8 +94,15 @@ namespace StockMgtApp.Models
                 da.Fill(dataTable);
                 int count = dataTable.Rows.Count;
                 sheet.Cells.LoadFromDataTable(dataTable, true);
-                FileInfo excelFile = new FileInfo(@"C:\Users\HP\Desktop\Log\rep.xlsx");
-                excel.SaveAs(excelFile);
+                string fileName = "rep";
+                
+                fileName +=Guid.NewGuid();
+                FileInfo excelFile = new FileInfo(@$"C:\Users\HP\Desktop\Log\{fileName}.xlsx");
+                if (excelFile.Exists)
+                {
+                    excelFile.Delete();
+                }
+               excel.SaveAs(excelFile);
 
 
 

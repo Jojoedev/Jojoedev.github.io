@@ -142,3 +142,43 @@ Name: Martel Swift
  IssuedToDate:10.00 
  Date/Time: 16/08/2023 21:30:23 
 , 
+Name: Seagrams 
+ Quantity: 12.00, 
+ Cost/Unit: 1500.00,
+ Current Issue: 1 
+ Stock Balance: 0.00, 
+ IssuedToDate:12.00 
+ Date/Time: 16/08/2023 21:35:40 
+, 
+Name: Seagrams 
+ Quantity: 12.00, 
+ Cost/Unit: 1500.00,
+ Current Issue: 1 
+ Stock Balance: 0.00, 
+ IssuedToDate:12.00 
+ Date/Time: 16/08/2023 21:35:57 
+, 
+Name: Jameson BlackBarrel 
+ Quantity: 300.00, 
+ Cost/Unit: 2000.00,
+ Current Issue: 40 
+ Stock Balance: 230.00, 
+ IssuedToDate:70.00 
+ Date/Time: 16/08/2023 21:45:05 
+, 
+Name: Jameson BlackBarrel 
+ Quantity: 300.00, 
+ Cost/Unit: 3200.00,
+ Current Issue: 43 
+ Stock Balance: 257.00, 
+ IssuedToDate:43.00 
+ Date/Time: 16/08/2023 21:51:19 
+, 
+Name: Seagrams 
+ Quantity: 22.00, 
+ Cost/Unit: 2000.00,
+ Current Issue: 6 
+ Stock Balance: 16.00, 
+ IssuedToDate:6.00 
+ Date/Time: 16/08/2023 21:51:56 
+, 
