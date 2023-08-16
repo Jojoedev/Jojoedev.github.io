@@ -76,12 +76,13 @@ namespace StockMgtApp.Pages.Logic
                     stockItem.StockBalance = Purchaseqty - stockItem.NewTotal;
                 }
 
-                
+
                 
                 Logger.Log(stockItem); //Creating .csv file history on every issue operation.
 
                 //Logger.SetAction("Issue");
                 _Context.SaveChanges();
+                Logger.Download();
                 return RedirectToPage("/Logic/List");
             }
             return Page();

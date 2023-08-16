@@ -8,10 +8,10 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/Logic/List">Stock List</a>
+            <a class="nav-link text-dark" asp-area="" asp-page="/Logic/List">Stock Management</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/ItemsLogic/CreateItem">Item List</a>
+            <a class="nav-link text-dark" asp-area="" asp-page="/ItemsLogic/List">Stock Item Management</a>
         </li>
         <li class="nav-item">
             <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>

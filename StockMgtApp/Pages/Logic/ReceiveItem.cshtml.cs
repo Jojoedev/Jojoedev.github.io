@@ -62,6 +62,8 @@ namespace StockMgtApp.Pages.Logic
         //        Logger.SetAction("Issue");
 
                 _Context.SaveChanges();
+             //_logger.LogInformation(Logs.SuccessMsg(stockItem));
+             _logger.LogInformation("Item was successfully created!");
                 return RedirectToPage("/Logic/List");
                 
             }

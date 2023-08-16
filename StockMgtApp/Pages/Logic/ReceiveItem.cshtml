@@ -19,21 +19,21 @@
 
             <div class="form-group">
             <label asp-for="@Model.stockItem.Description"></label>
-            <input asp-for="@Model.stockItem.Description" class="form-control" autocomplete="off" />
+            <input asp-for="@Model.stockItem.Description" placeholder="Describe item in bottles" class="form-control" autocomplete="off" />
             <span class="text-danger" asp-validation-for="@Model.stockItem.Description"></span>
         </div>
 
 
         <div class="form-group">
             <label asp-for="@Model.stockItem.Quantity"></label>
-            <input asp-for="@Model.stockItem.Quantity" class="form-control" autocomplete="off" />
+            <input asp-for="@Model.stockItem.Quantity" placeholder="Enter quantity in bottles" class="form-control" autocomplete="off" />
             <span class="text-danger" asp-validation-for="@Model.stockItem.Quantity"></span>
         </div>
 
         <div class="form-group">
 
             <label asp-for="@Model.stockItem.Unitprice"> Unit Price</label>
-            <input asp-for="@Model.stockItem.Unitprice" autocomplete="off" class="form-control" />
+            <input asp-for="@Model.stockItem.Unitprice" placeholder="Naira" autocomplete="off" class="form-control" />
             <span class="text-danger" asp-validation-for="@Model.stockItem.Unitprice"></span>
 
         </div>

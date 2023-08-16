@@ -29,9 +29,12 @@ namespace StockMgtApp.Pages.Logic
         //public StockItem StockItem { get; set; }
         public void  OnGet()
         {
+            
            // StockItem = (from emp in _Context.STOCKMGT select emp).ToList<ItemCategory>();
             StockItem = _Context.STOCKMGT.Include(s => s.Category).ToList();
-            //return StockItem;
+           //Logger.Download(StockItem).ToList();    
+           
         }
     }
+    
 }

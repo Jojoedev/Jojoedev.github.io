@@ -2,3 +2,26 @@
 @model StockMgtApp.Pages.ItemsLogic.ListModel
 @{
 }
+
+<h3>List of Stock Items </h3>
+
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in @Model.itemCategory)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+    <a href="./CreateItem" class="btn btn-outline-primary">Create Item</a>
+</div>
